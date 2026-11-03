@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OUTOFLANE — discover destinations, culture, nature and memorable journeys across India.">
+  <meta name="theme-color" content="#123d36">
+  <title>OUTOFLANE | Discover India Beyond the Usual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #123d36;
+      --green2: #1d5147;
+      --cream: #f5f2e9;
+      --sand: #e8e0d1;
+      --ink: #1d2824;
+      --muted: #6d7771;
+      --orange: #d47d4d;
+      --white: #fff;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --green: #2dd4bf;
+      --green2: #14352e;
+      --cream: #091714;
+      --sand: #122823;
+      --ink: #f0f6f3;
+      --muted: #8aa398;
+      --orange: #f28b5b;
+      --white: #122b25;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      height: 82px;
+      padding: 0 6.5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--cream);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid #e7e2d8;
+    }
+    [data-theme="dark"] .site-header { border-bottom-color: #23453d; }
+
+    .brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.15;
+    }
+    .brand small { display: block; font-size: 8px; letter-spacing: 1.5px; color: var(--muted); margin-top: 5px; }
+    .brand-mark {
+      width: 37px;
+      height: 37px;
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font: 700 22px var(--serif);
+      color: var(--orange);
+    }
+
+    nav { display: flex; gap: 30px; font-size: 12px; font-weight: 600; color: var(--muted); }
+    nav a:hover, .footer a:hover { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--green);
+      color: white;
+      padding: 12px 17px;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-cta span { padding-left: 10px; }
+
+    .theme-btn {
+      background: var(--white);
+      border: 1px solid #dcd6c9;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-right: 12px;
+    }
+    [data-theme="dark"] .theme-btn { border-color: #23453d; }
+
+    .menu-toggle { display: none; background: none; border: 0; font-size: 25px; cursor: pointer; color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      min-height: 620px;
+      background: linear-gradient(90deg, rgba(7,31,27,.82), rgba(7,31,27,.18)),
+                  url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=2000&q=85') center 48%/cover;
+      position: relative;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 80px 10%;
+    }
+    .hero-content { max-width: 620px; position: relative; }
+    .eyebrow { font-size: 10px; letter-spacing: 2.4px; font-weight: 700; color: var(--orange); margin: 0 0 18px; text-transform: uppercase; }
+    .eyebrow.light { color: #e5b28f; }
+
+    .hero h1, .feature-copy h2, .planner h2, .about h2, .contact-section h2 {
+      font: 700 clamp(44px, 6.5vw, 80px)/1.05 var(--serif);
+      letter-spacing: -2px;
+      margin: 0 0 22px;
+    }
+    .hero h1 em, .feature-copy h2 em, .planner h2 em, .about h2 em, .contact-section h2 em {
+      font-weight: 400;
+      font-style: italic;
+      color: #e8b28c;
+    }
+    .hero-copy { max-width: 440px; color: #e5e9e4; font-size: 15px; margin-bottom: 32px; }
+
+    .button {
+      display: inline-flex;
+      gap: 20px;
+      align-items: center;
+      padding: 15px 22px;
+      border: 0;
+      border-radius: 2px;
+      font: 700 12px var(--sans);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .button-light { background: var(--cream); color: #123d36; }
+    .button-outline { border: 1px solid #c4d0c8; color: white; background: transparent; }
+
+    .hero-note {
+      position: absolute;
+      bottom: 28px;
+      left: 10%;
+      right: 10%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #e4e6e0;
+      font-weight: 600;
+    }
+
+    .section-wrap { padding: 100px 9%; border-bottom: 1px solid #e7e2d8; }
+    [data-theme="dark"] .section-wrap { border-bottom-color: #23453d; }
+
+    .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; align-items: end; }
+    .intro h2, .section-heading h2 { font: 700 clamp(34px, 4vw, 52px)/1.1 var(--serif); letter-spacing: -1px; margin: 0; }
+    .intro-copy { max-width: 480px; color: var(--muted); font-size: 14px; }
+
+    .text-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 12px;
+      border-bottom: 1px solid var(--orange);
+      padding-bottom: 5px;
+    }
+    .text-link span { margin-left: 14px; }
+
+    .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 38px; gap: 20px; }
+    .section-heading > p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* Search & Grid */
+    .search-panel { display: flex; gap: 12px; align-items: center; margin-bottom: 25px; flex-wrap: wrap; }
+    .search-box {
+      background: var(--white);
+      border: 1px solid #e7e1d7;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 15px;
+      flex: 1;
+      min-width: 260px;
+      height: 48px;
+      border-radius: 2px;
+    }
+    .search-box span { font-size: 22px; color: var(--orange); }
+    .search-box input { border: 0; outline: 0; width: 100%; font: 13px var(--sans); background: transparent; color: var(--ink); }
+    .search-panel select, .planner-form select {
+      height: 48px;
+      border: 1px solid #e7e1d7;
+      background: var(--white);
+      padding: 0 14px;
+      color: var(--ink);
+      font: 12px var(--sans);
+      border-radius: 2px;
+    }
+    .result-count { font-size: 11px; color: var(--muted); white-space: nowrap; font-weight: 600; }
+
+    .destination-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .destination-card {
+      background: var(--white);
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      border: 1px solid #eee9df;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .destination-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+    .card-top { height: 8px; background: var(--card-color, var(--green)); }
+    .destination-card .card-content { padding: 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .card-region { font-size: 9px; letter-spacing: 1.7px; color: var(--orange); font-weight: 700; text-transform: uppercase; }
+    .destination-card h3 { font: 700 24px var(--serif); margin: 7px 0 8px; }
+    .destination-card p { font-size: 11px; color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
+    .card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      border-top: 1px solid #f0ede7;
+      padding-top: 12px;
+    }
+    .card-bottom b { color: var(--green); font-size: 16px; }
+
+    .empty-state { padding: 40px; text-align: center; color: var(--muted); font-size: 13px; }
+
+    /* Feature Band */
+    .feature-band { display: grid; grid-template-columns: 1fr 1fr; background: var(--green); color: white; min-height: 500px; }
+    .feature-image {
+      background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85') center/cover;
+      min-height: 400px;
+    }
+    .feature-copy { padding: 75px 12%; align-self: center; }
+    .feature-copy h2 { font-size: clamp(38px, 4.5vw, 60px); }
+    .feature-copy > p:not(.eyebrow) { font-size: 13px; color: #d2ded8; max-width: 400px; margin-bottom: 28px; line-height: 1.6; }
+
+    /* Grids */
+    .experience-grid, .idea-grid, .journal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .experience-card { padding: 26px; background: #eae5d9; min-height: 180px; border-radius: 2px; }
+    .experience-icon { font-size: 25px; }
+    .experience-card h3 { font: 700 21px var(--serif); margin: 12px 0 6px; }
+    .experience-card p { font-size: 12px; color: var(--muted); margin: 0; }
+    .experience-card small { color: var(--orange); font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; font-weight: 700; }
+
+    /* Planner */
+    .planner { background: var(--green); color: white; padding: 90px 9%; }
+    .planner-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; max-width: 1100px; margin: auto; }
+    .planner h2 { font-size: clamp(40px, 4.5vw, 60px); }
+    .planner-inner > div > p:not(.eyebrow) { color: #d2ded8; font-size: 13px; max-width: 360px; line-height: 1.6; }
+    .planner-form { display: grid; gap: 14px; }
+    .planner-form label { display: grid; gap: 7px; font-size: 11px; color: #dce5df; font-weight: 600; text-transform: uppercase; }
+    .planner-form label span { float: right; color: #f2ad87; }
+    .planner-form select { width: 100%; border: 0; background: white; color: #123d36; font-weight: 600; }
+    .planner-form input[type=range] { width: 100%; accent-color: #e5b28f; cursor: pointer; }
+    .planner-form .button { justify-content: space-between; margin-top: 8px; }
+    .form-note { font-size: 9px; color: #b8c9c0; margin: 0; }
+    .trip-result {
+      max-width: 1100px;
+      margin: 25px auto 0;
+      padding: 22px;
+      background: #1c5147;
+      border-left: 4px solid #e5b28f;
+      font-size: 13px;
+      border-radius: 2px;
+      line-height: 1.6;
+    }
+
+    /* Ideas & Journal */
+    .idea-card { padding: 28px; background: #eae5d9; min-height: 210px; border-radius: 2px; }
+    .idea-card .number { font: 700 38px var(--serif); color: #c9a68d; }
+    .idea-card h3 { font: 700 22px var(--serif); margin: 5px 0; }
+    .idea-card p { font-size: 12px; color: var(--muted); margin: 0; }
+    .idea-card small { font-size: 10px; color: var(--orange); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+    .journal-card { background: var(--white); padding: 25px; min-height: 190px; border-radius: 2px; border: 1px solid #eee9df; }
+    .journal-card small { font-size: 9px; color: var(--orange); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; }
+    .journal-card h3 { font: 700 22px var(--serif); margin: 12px 0 8px; }
+    .journal-card p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    .about {
+      background: linear-gradient(90deg, rgba(16,47,43,.96), rgba(16,47,43,.82)),
+                  url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=80') center/cover;
+      padding: 100px 9%;
+      color: white;
+    }
+    .about-inner { max-width: 680px; }
+    .about h2 { font-size: clamp(40px, 5vw, 65px); }
+    .about-inner > p:not(.eyebrow) { max-width: 560px; color: #d4ded8; font-size: 14px; line-height: 1.6; }
+    .light-link { color: white; }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 90px 9%;
+      background: var(--sand);
+      border-top: 1px solid #dcd6c9;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10%;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .contact-form {
+      background: var(--white);
+      padding: 30px;
+      border-radius: 2px;
+      border: 1px solid #e7e1d7;
+      display: grid;
+      gap: 14px;
+    }
+    .contact-form label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+    .contact-form input, .contact-form select, .contact-form textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid #e7e1d7;
+      background: var(--cream);
+      color: var(--ink);
+      font: 13px var(--sans);
+      border-radius: 2px;
+      margin-top: 4px;
+      outline: none;
+    }
+
+    /* Footer */
+    .footer { background: #102c28; color: white; padding: 45px 9% 30px; }
+    .footer-top, .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .brand-footer .brand-mark { border-color: #d6e0d9; color: white; }
+    .brand-footer small { color: #b6c7bf; }
+    .footer-top > p { font: italic 17px var(--serif); color: #d5b49b; margin: 0; }
+    .footer-bottom { border-top: 1px solid #35534c; margin-top: 32px; padding-top: 20px; font-size: 11px; color: #b8c9c0; }
+    .footer-bottom div { display: flex; gap: 22px; }
+    .disclaimer { font-size: 10px; color: #8fa59b; margin: 20px 0 0; max-width: 900px; line-height: 1.5; }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.open { display: flex; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(7, 29, 25, 0.85); }
+    .modal-card {
+      position: relative;
+      background: var(--cream);
+      width: min(660px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 40px;
+      border-radius: 2px;
+      z-index: 10;
+    }
+    .modal-close {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      border: 0;
+      background: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .modal-card h2 { font: 700 36px var(--serif); margin: 8px 0; }
+    .modal-card p, .modal-card li { font-size: 13px; color: var(--muted); }
+    .modal-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .fact { background: #eae5d9; padding: 14px; border-radius: 2px; }
+    .fact small { display: block; color: var(--orange); font-size: 9px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .fact b { font-size: 12px; color: var(--ink); }
+    .modal-card h3 { font: 700 20px var(--serif); margin-top: 20px; }
+    .modal-card .button { margin-top: 16px; background: var(--green); color: white; width: 100%; justify-content: center; }
+
+    /* Dark Mode Theme Rules */
+    [data-theme="dark"] .site-header,
+    [data-theme="dark"] .search-box,
+    [data-theme="dark"] .destination-card,
+    [data-theme="dark"] .journal-card,
+    [data-theme="dark"] .search-panel select,
+    [data-theme="dark"] .modal-card,
+    [data-theme="dark"] .contact-form {
+      background: var(--white);
+      color: var(--ink);
+      border-color: #23453d;
+    }
+    [data-theme="dark"] .experience-card,
+    [data-theme="dark"] .idea-card,
+    [data-theme="dark"] .fact {
+      background: var(--sand);
+      color: var(--ink);
+    }
+    [data-theme="dark"] .contact-form input,
+    [data-theme="dark"] .contact-form select,
+    [data-theme="dark"] .contact-form textarea {
+      border-color: #23453d;
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    @media(max-width: 850px) {
+      nav { gap: 14px; }
+      .nav-cta { display: none; }
+      .destination-grid, .experience-grid, .idea-grid, .journal-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-wrap { padding: 75px 6%; }
+      .hero { min-height: 560px; padding: 70px 7%; }
+      .feature-copy { padding: 60px 8%; }
+      .planner { padding: 75px 7%; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media(max-width: 620px) {
+      .site-header { height: 70px; padding: 0 5%; }
+      .menu-toggle { display: block; }
+      nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        padding: 20px 6%;
+        flex-direction: column;
+        box-shadow: 0 12px 20px rgba(0,0,0,.15);
+      }
+      nav.open { display: flex; }
+      .hero { min-height: 540px; }
+      .hero h1 { font-size: 46px; }
+      .intro, .planner-inner, .feature-band { grid-template-columns: 1fr; gap: 25px; }
+      .feature-image { min-height: 260px; }
+      .destination-grid, .experience-grid, .idea-grid, .journal-grid { grid-template-columns: 1fr; }
+      .footer-top, .footer-bottom { align-items: flex-start; gap: 18px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#" aria-label="OUTOFLANE home">
+    <span class="brand-mark">O</span>
+    <span>OUTOFLANE<small>DISCOVER BEYOND THE USUAL</small></span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+  <nav id="mainNav">
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#journeys">Trip ideas</a>
+    <a href="#journal">Travel journal</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div style="display:flex; align-items:center;">
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle light or dark theme" title="Toggle Theme">🌓</button>
+    <a class="nav-cta" href="#planner">Plan a trip <span>↗</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="eyebrow light">A LITTLE CLOSER TO THE UNEXPECTED</p>
+      <h1>Find your own<br><em>way out there.</em></h1>
+      <p class="hero-copy">From quiet mountain towns to colourful old streets, discover the many stories of India across all 36 states and union territories.</p>
+      <a class="button button-light" href="#destinations">Explore destinations <span>→</span></a>
+    </div>
+    <div class="hero-note">
+      <span>01 / 36</span>
+      <span>36 STATES &amp; UNION TERRITORIES</span>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="intro section-wrap">
+    <div>
+      <p class="eyebrow">TRAVEL WITH CURIOSITY</p>
+      <h2>India is not just<br>one destination.</h2>
+    </div>
+    <div class="intro-copy">
+      <p>It is a collection of landscapes, flavours, traditions and unforgettable moments. OUTOFLANE helps you find places to go, things to experience and ideas to shape a journey that feels like yours.</p>
+      <a class="text-link" href="#about">Get to know our philosophy <span>↗</span></a>
+    </div>
+  </section>
+
+  <!-- Destinations Directory -->
+  <section class="destinations section-wrap" id="destinations">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">THE DESTINATION EDIT</p>
+        <h2>Where will you go?</h2>
+      </div>
+      <p>Explore all 36 states and union territories<br>and find a place that calls to you.</p>
+    </div>
+    <div class="search-panel">
+      <div class="search-box">
+        <span>⌕</span>
+        <input id="searchInput" type="search" placeholder="Search a state, city, capital, or vibe…">
+      </div>
+      <select id="regionFilter" aria-label="Filter by region">
+        <option value="All">All regions</option>
+        <option>North India</option>
+        <option>South India</option>
+        <option>East India</option>
+        <option>West India</option>
+        <option>Central India</option>
+        <option>North East India</option>
+        <option>Islands</option>
+      </select>
+      <span class="result-count" id="resultCount">36 destinations</span>
+    </div>
+    <div class="destination-grid" id="destinationGrid"></div>
+    <p class="empty-state" id="emptyState" style="display:none;">No destinations match your search. Try another keyword or region.</p>
+  </section>
+
+  <!-- Feature Band -->
+  <section class="feature-band" id="experiences">
+    <div class="feature-image"></div>
+    <div class="feature-copy">
+      <p class="eyebrow light">GO BEYOND THE CHECKLIST</p>
+      <h2>Collect moments,<br><em>not just miles.</em></h2>
+      <p>Find meaningful ways to connect with the places you visit — through food, heritage, nature and local culture.</p>
+      <a class="button button-outline" href="#journeys">Find your experience <span>→</span></a>
+    </div>
+  </section>
+
+  <!-- Experiences Grid -->
+  <section class="experiences section-wrap">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">MAKE IT YOURS</p>
+        <h2>Experiences to remember</h2>
+      </div>
+      <p>Every journey has a different rhythm.<br>Choose the kind of discovery you love.</p>
+    </div>
+    <div class="experience-grid" id="experienceGrid"></div>
+  </section>
+
+  <!-- Interactive Planner -->
+  <section class="planner" id="planner">
+    <div class="planner-inner">
+      <div>
+        <p class="eyebrow light">START WITH AN IDEA</p>
+        <h2>Your next story<br>starts <em>somewhere.</em></h2>
+        <p>Build a simple trip outline with a destination, travel style and number of days.</p>
+      </div>
+      <form id="tripForm" class="planner-form">
+        <label>
+          Where would you like to go?
+          <select id="tripDestination" required>
+            <option value="">Choose a destination</option>
+          </select>
+        </label>
+        <label>
+          What kind of trip?
+          <select id="tripStyle">
+            <option>Culture &amp; heritage</option>
+            <option>Nature &amp; outdoors</option>
+            <option>Food &amp; local life</option>
+            <option>Relaxed getaway</option>
+            <option>Family holiday</option>
+          </select>
+        </label>
+        <label>
+          How many days? <span id="daysValue">5 days</span>
+          <input id="tripDays" type="range" min="1" max="20" value="5">
+        </label>
+        <button class="button button-light" type="submit">Create my trip idea <span>→</span></button>
+        <p class="form-note">* Creates a planning suggestion only — no commercial booking.</p>
+      </form>
+    </div>
+    <div class="trip-result" id="tripResult" style="display:none;"></div>
+  </section>
+
+  <!-- Sample Packages -->
+  <section class="ideas section-wrap" id="journeys">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A GOOD PLACE TO BEGIN</p>
+        <h2>Trip ideas for every mood</h2>
+      </div>
+      <p>Not sure where to start?<br>Let these flexible ideas inspire you.</p>
+    </div>
+    <div class="idea-grid" id="packageGrid"></div>
+  </section>
+
+  <!-- Travel Journal -->
+  <section class="journal section-wrap" id="journal">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">NOTES FROM THE ROAD</p>
+        <h2>The travel journal</h2>
+      </div>
+      <p>Small ideas for thoughtful,<br>curious and confident travel.</p>
+    </div>
+    <div class="journal-grid" id="articleGrid"></div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <p class="eyebrow light">OUR POINT OF VIEW</p>
+      <h2>Take the scenic route.<br><em>Every once in a while.</em></h2>
+      <p>OUTOFLANE is a travel discovery concept built around the belief that the best journeys leave room for curiosity. We bring destination inspiration, practical planning prompts and ideas for exploring India with care.</p>
+      <a href="#destinations" class="text-link light-link">Find your next destination <span>↗</span></a>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-section" id="contact">
+    <div class="contact-grid">
+      <div>
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h2>Connect with<br><em>OUTOFLANE.</em></h2>
+        <p style="font-size:14px; color:var(--muted); line-height:1.6; margin: 16px 0 24px;">
+          Have questions about exploring a specific state or destination? Suggesting a responsible local homestay or community artisan? Drop us a note.
+        </p>
+        <div style="font-size:13px; color:var(--ink);">
+          <strong style="color:var(--orange);">Editorial Desk:</strong><br>
+          <a href="mailto:outoflane1@gmail.com" style="color:var(--orange); text-decoration:underline; font-weight:bold; font-size:15px;">outoflane1@gmail.com</a>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div>
+          <label>Your Name</label>
+          <input type="text" id="cName" required placeholder="Maya Sharma">
+        </div>
+        <div>
+          <label>Your Email</label>
+          <input type="email" id="cEmail" required placeholder="maya@example.com">
+        </div>
+        <div>
+          <label>Inquiry Topic</label>
+          <select id="cTopic">
+            <option>Custom Trip Planning Guidance</option>
+            <option>Independent Homestay / Experience Partner</option>
+            <option>Editorial &amp; Travel Journal Pitch</option>
+            <option>General Questions &amp; Feedback</option>
+          </select>
+        </div>
+        <div>
+          <label>Your Message</label>
+          <textarea id="cMessage" rows="4" required placeholder="Tell us about your travel plans..."></textarea>
+        </div>
+        <button class="button button-light" type="submit" style="background:var(--green); color:white; justify-content:center;">
+          Send Note to outoflane1@gmail.com <span>→</span>
+        </button>
+        <div id="cSuccess" style="display:none; color:var(--orange); font-size:12px; font-weight:bold; text-align:center;">
+          Thank you! Your note has been received.
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <a class="brand brand-footer" href="#">
+      <span class="brand-mark">O</span>
+      <span>OUTOFLANE<small>DISCOVER BEYOND THE USUAL</small></span>
+    </a>
+    <p>Go somewhere that stays with you.</p>
+  </div>
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> OUTOFLANE. All rights reserved.</span>
+    <div>
+      <a href="mailto:outoflane1@gmail.com">outoflane1@gmail.com</a>
+      <a href="#destinations">36 Destinations</a>
+    </div>
+  </div>
+  <p class="disclaimer">Travel details are general inspiration. Confirm current entry rules, permits, weather, transport and opening times with official sources before travelling. OUTOFLANE does not currently sell or book travel services.</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="destinationModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <article class="modal-card">
+    <button class="modal-close" data-close aria-label="Close">×</button>
+    <div id="modalContent"></div>
+  </article>
+</div>
+
+<script>
+// ==========================================
+// 1. DATA: 36 STATES & UNION TERRITORIES
+// ==========================================
+const data = [
+  { name: "Andhra Pradesh", region: "South India", capital: "Amaravati", places: ["Tirupati", "Araku Valley", "Visakhapatnam"], season: "October–March", duration: "5–7 days", vibe: "Temples, beaches, hill landscapes and coastal cuisine" },
+  { name: "Arunachal Pradesh", region: "North East India", capital: "Itanagar", places: ["Tawang", "Ziro", "Bomdila", "Namdapha"], season: "October–April", duration: "6–9 days", vibe: "Monasteries, mountain valleys and rich tribal cultures" },
+  { name: "Assam", region: "North East India", capital: "Dispur", places: ["Kaziranga", "Majuli", "Guwahati", "Sivasagar"], season: "October–April", duration: "5–7 days", vibe: "Wildlife, river islands, tea gardens and heritage" },
+  { name: "Bihar", region: "East India", capital: "Patna", places: ["Bodh Gaya", "Nalanda", "Rajgir", "Vaishali"], season: "October–March", duration: "4–6 days", vibe: "Buddhist heritage, ancient universities and history" },
+  { name: "Chhattisgarh", region: "Central India", capital: "Raipur", places: ["Chitrakote Falls", "Bastar", "Sirpur", "Kanger Valley"], season: "October–March", duration: "5–7 days", vibe: "Waterfalls, forests, caves and indigenous culture" },
+  { name: "Goa", region: "West India", capital: "Panaji", places: ["Old Goa", "Palolem", "Fontainhas", "Dudhsagar"], season: "November–February", duration: "4–6 days", vibe: "Portuguese architecture, beaches and spice farms" },
+  { name: "Gujarat", region: "West India", capital: "Gandhinagar", places: ["Rann of Kutch", "Gir", "Ahmedabad", "Dwarka"], season: "October–March", duration: "6–8 days", vibe: "Salt deserts, Asiatic lions, stepwells and textiles" },
+  { name: "Haryana", region: "North India", capital: "Chandigarh", places: ["Kurukshetra", "Sultanpur Bird Sanctuary", "Pinjore Gardens"], season: "October–March", duration: "2–4 days", vibe: "Ancient battlegrounds, heritage gardens and wetlands" },
+  { name: "Himachal Pradesh", region: "North India", capital: "Shimla", places: ["Spiti", "Dharamshala", "Manali", "Kinnaur"], season: "March–June; Sept–Nov", duration: "6–9 days", vibe: "Pine forests, high passes, apple orchards and monasteries" },
+  { name: "Jharkhand", region: "East India", capital: "Ranchi", places: ["Betla National Park", "Hundru Falls", "Deoghar", "Netarhat"], season: "October–March", duration: "4–6 days", vibe: "Plateaus, waterfalls, tribal traditions and pilgrim sites" },
+  { name: "Karnataka", region: "South India", capital: "Bengaluru", places: ["Hampi", "Coorg", "Mysuru", "Gokarna", "Badami"], season: "October–March", duration: "6–9 days", vibe: "UNESCO ruins, coffee hills, coastline and palaces" },
+  { name: "Kerala", region: "South India", capital: "Thiruvananthapuram", places: ["Alleppey", "Munnar", "Kochi", "Wayanad", "Varkala"], season: "September–March", duration: "6–9 days", vibe: "Backwaters, tea slopes, spice markets and coastal sunsets" },
+  { name: "Madhya Pradesh", region: "Central India", capital: "Bhopal", places: ["Khajuraho", "Kanha", "Orchha", "Bhimbetka", "Bandhavgarh"], season: "October–March", duration: "7–10 days", vibe: "Tiger reserves, carved stone temples and river forts" },
+  { name: "Maharashtra", region: "West India", capital: "Mumbai", places: ["Ajanta & Ellora", "Mahabaleshwar", "Konkan Coast", "Pune"], season: "October–March", duration: "5–8 days", vibe: "Rock-cut caves, basalt hill forts and coastal villages" },
+  { name: "Manipur", region: "North East India", capital: "Imphal", places: ["Loktak Lake", "Keibul Lamjao", "Ukhrul", "Kangla"], season: "October–April", duration: "4–6 days", vibe: "Floating lake islands, rare deer and hill landscapes" },
+  { name: "Meghalaya", region: "North East India", capital: "Shillong", places: ["Cherrapunji", "Mawlynnong", "Dawki", "Jowai"], season: "October–April", duration: "5–7 days", vibe: "Living root bridges, clear river waters and cloud valleys" },
+  { name: "Mizoram", region: "North East India", capital: "Aizawl", places: ["Champhai", "Reiek", "Vantawng Falls", "Phawngpui"], season: "October–March", duration: "4–6 days", vibe: "Rolling blue hills, bamboo forests and community villages" },
+  { name: "Nagaland", region: "North East India", capital: "Kohima", places: ["Dzukou Valley", "Khonoma", "Mokokchung", "Mon"], season: "October–May", duration: "5–7 days", vibe: "Green valleys, tribal heritage and craft traditions" },
+  { name: "Odisha", region: "East India", capital: "Bhubaneswar", places: ["Konark", "Puri", "Chilika Lake", "Raghurajpur"], season: "October–March", duration: "5–7 days", vibe: "Sun temples, dolphin lagoons, textiles and artisan villages" },
+  { name: "Punjab", region: "North India", capital: "Chandigarh", places: ["Amritsar", "Patiala", "Kapurthala", "Anandpur Sahib"], season: "October–March", duration: "3–5 days", vibe: "Golden Temple, heritage palaces and warm hospitality" },
+  { name: "Rajasthan", region: "West India", capital: "Jaipur", places: ["Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Pushkar"], season: "October–March", duration: "7–10 days", vibe: "Hill forts, desert dunes, lake palaces and vibrant craft" },
+  { name: "Sikkim", region: "North East India", capital: "Gangtok", places: ["Pelling", "Yuksom", "Lachung", "Gurudongmar"], season: "March–May; Oct–Dec", duration: "6–8 days", vibe: "Kanchenjunga vistas, high alpine lakes and monasteries" },
+  { name: "Tamil Nadu", region: "South India", capital: "Chennai", places: ["Madurai", "Thanjavur", "Mahabalipuram", "Ooty", "Chettinad"], season: "November–March", duration: "6–9 days", vibe: "Dravidian temple towers, bronze casting and hill railways" },
+  { name: "Telangana", region: "South India", capital: "Hyderabad", places: ["Golconda", "Charminar", "Warangal", "Ramappa"], season: "October–March", duration: "4–6 days", vibe: "Historic citadels, pearls, UNESCO stone temples and biryani" },
+  { name: "Tripura", region: "North East India", capital: "Agartala", places: ["Ujjayanta Palace", "Unakoti", "Neermahal", "Jampui Hills"], season: "October–March", duration: "4–6 days", vibe: "Water palaces, ancient rock carvings and orange orchards" },
+  { name: "Uttar Pradesh", region: "North India", capital: "Lucknow", places: ["Varanasi", "Agra", "Lucknow", "Ayodhya", "Prayagraj"], season: "October–March", duration: "6–8 days", vibe: "Taj Mahal, sacred river ghats and royal cuisine" },
+  { name: "Uttarakhand", region: "North India", capital: "Dehradun", places: ["Rishikesh", "Nainital", "Valley of Flowers", "Auli"], season: "March–June; Sept–Nov", duration: "5–8 days", vibe: "Ganges riverbanks, alpine meadows and Himalayan peaks" },
+  { name: "West Bengal", region: "East India", capital: "Kolkata", places: ["Darjeeling", "Sundarbans", "Kolkata", "Kalimpong"], season: "October–March", duration: "6–8 days", vibe: "Tea estates, mangrove tiger habitats and colonial quarters" },
+  { name: "Andaman and Nicobar Islands", region: "Islands", capital: "Port Blair", places: ["Havelock", "Neil", "Radhanagar", "Baratang"], season: "November–April", duration: "5–7 days", vibe: "White sand shores, coral reefs and mangrove boat paths" },
+  { name: "Chandigarh", region: "North India", capital: "Chandigarh", places: ["Rock Garden", "Sukhna Lake", "Capitol Complex"], season: "October–March", duration: "2–3 days", vibe: "Modernist architecture, lakeside walks and green avenues" },
+  { name: "Dadra and Nagar Haveli and Daman and Diu", region: "West India", capital: "Daman", places: ["Diu Fort", "Jallandhar Beach", "Moti Daman"], season: "October–March", duration: "3–4 days", vibe: "Coastal ramparts, church squares and calm beaches" },
+  { name: "Delhi", region: "North India", capital: "New Delhi", places: ["Red Fort", "Qutub Minar", "Humayun’s Tomb", "India Gate"], season: "October–March", duration: "3–5 days", vibe: "Historic monuments, museums, food and markets" },
+  { name: "Jammu and Kashmir", region: "North India", capital: "Srinagar (summer); Jammu (winter)", places: ["Srinagar", "Gulmarg", "Pahalgam", "Sonamarg"], season: "March–October", duration: "6–9 days", vibe: "Valleys, gardens, lakes and mountain scenery" },
+  { name: "Ladakh", region: "North India", capital: "Leh", places: ["Leh", "Nubra Valley", "Pangong Lake", "Tso Moriri"], season: "June–September", duration: "6–9 days", vibe: "High-altitude landscapes, monasteries and lakes" },
+  { name: "Lakshadweep", region: "Islands", capital: "Kavaratti", places: ["Agatti", "Bangaram", "Kavaratti", "Kadmat"], season: "October–May", duration: "4–6 days", vibe: "Coral islands, lagoons and marine experiences" },
+  { name: "Puducherry", region: "South India", capital: "Puducherry", places: ["White Town", "Auroville", "Paradise Beach"], season: "October–March", duration: "3–5 days", vibe: "French-influenced streets, beaches and cafés" }
+];
+
+const extras = {
+  experiences: [
+    { name: "Heritage walks", type: "Culture", description: "Explore historic streets, monuments and local stories with a knowledgeable guide." },
+    { name: "Nature trails", type: "Nature", description: "Discover forests, hill paths, waterfalls and local biodiversity responsibly." },
+    { name: "Food trails", type: "Food", description: "Taste regional dishes, traditional snacks and local market favourites." },
+    { name: "Community experiences", type: "Culture", description: "Learn about crafts, traditions and everyday life through respectful local experiences." },
+    { name: "Wildlife watching", type: "Nature", description: "Observe wildlife from designated areas and follow park conservation rules." },
+    { name: "Coastal escapes", type: "Adventure", description: "Enjoy beaches, island scenery and approved water-based activities." }
+  ],
+  samplePackages: [
+    { name: "Culture & Heritage Trail", duration: "4 days", style: "Culture", description: "A flexible route linking landmark monuments, local neighbourhoods and regional food." },
+    { name: "Nature & Slow Travel", duration: "5 days", style: "Nature", description: "A relaxed itinerary with scenic viewpoints, nature walks and locally run stays." },
+    { name: "Weekend Discovery", duration: "2–3 days", style: "Short break", description: "A compact getaway built around one destination and its nearby highlights." }
+  ],
+  articles: [
+    { title: "How to travel more responsibly", category: "Travel tips", description: "Choose local businesses, reduce waste, respect customs and leave natural places as you found them." },
+    { title: "Plan a smoother India trip", category: "Planning", description: "Check seasonal conditions, travel times, permits and local transport before you set out." },
+    { title: "Make room for local culture", category: "Culture", description: "Explore beyond famous landmarks through food, crafts, museums and community-led experiences." }
+  ]
+};
+
+// ==========================================
+// 2. INTERACTIVE SCRIPT LOGIC
+// ==========================================
+const palette = ["#1d5147", "#c47b50", "#687d69", "#b58b62", "#496a7a", "#92745f"];
+
+function renderDestinations() {
+  const q = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+  const region = document.getElementById("regionFilter").value;
+  const filtered = data.filter(s => (region === "All" || s.region === region) &&
+    [s.name, s.capital, s.region, ...s.places, s.vibe].join(" ").toLowerCase().includes(q));
+
+  document.getElementById("resultCount").textContent = `${filtered.length} destination${filtered.length === 1 ? "" : "s"}`;
+  document.getElementById("emptyState").style.display = filtered.length === 0 ? "block" : "none";
+
+  document.getElementById("destinationGrid").innerHTML = filtered.map(s => `
+    <article class="destination-card" tabindex="0" role="button" data-state="${encodeURIComponent(s.name)}" style="--card-color:${palette[data.indexOf(s) % palette.length]}">
+      <div class="card-top"></div>
+      <div class="card-content">
+        <span class="card-region">${s.region}</span>
+        <h3>${s.name}</h3>
+        <p>${s.vibe}</p>
+        <div class="card-bottom">
+          <span>Capital: <strong>${s.capital}</strong></span>
+          <b>↗</b>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function showDestination(name) {
+  const s = data.find(x => x.name === name);
+  if (!s) return;
+  document.getElementById("modalContent").innerHTML = `
+    <p class="eyebrow">${s.region}</p>
+    <h2>${s.name}</h2>
+    <p>${s.vibe}.</p>
+    <div class="modal-facts">
+      <div class="fact"><small>Capital</small><b>${s.capital}</b></div>
+      <div class="fact"><small>Suggested duration</small><b>${s.duration}</b></div>
+      <div class="fact"><small>Good time to visit</small><b>${s.season}</b></div>
+      <div class="fact"><small>Travel style</small><b>Mindful discovery</b></div>
+    </div>
+    <h3>Places to explore</h3>
+    <ul style="margin: 8px 0 20px 20px; font-size:13px; color:var(--muted);">
+      ${s.places.map(p => `<li>${p}</li>`).join("")}
+    </ul>
+    <button class="button" onclick="planForDestination('${s.name}')">Plan a Trip in Trip Planner →</button>
+  `;
+  const m = document.getElementById("destinationModal");
+  m.classList.add("open");
+  m.setAttribute("aria-hidden", "false");
+}
+
+function planForDestination(name) {
+  closeModal();
+  const sel = document.getElementById("tripDestination");
+  if (sel) sel.value = name;
+  const p = document.getElementById("planner");
+  if (p) p.scrollIntoView({ behavior: "smooth" });
+}
+
+function closeModal() {
+  const m = document.getElementById("destinationModal");
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden", "true");
+}
+
+function renderExtras() {
+  document.getElementById("experienceGrid").innerHTML = (extras.experiences || []).map((x, i) => `
+    <article class="experience-card">
+      <span class="experience-icon">${["⌁", "⌂", "✳", "◌", "♧", "≈"][i % 6]}</span>
+      <small>${x.type}</small>
+      <h3>${x.name}</h3>
+      <p>${x.description}</p>
+    </article>
+  `).join("");
+
+  document.getElementById("packageGrid").innerHTML = (extras.samplePackages || []).map((x, i) => `
+    <article class="idea-card">
+      <span class="number">0${i + 1}</span>
+      <small>${x.duration} · ${x.style}</small>
+      <h3>${x.name}</h3>
+      <p>${x.description}</p>
+    </article>
+  `).join("");
+
+  document.getElementById("articleGrid").innerHTML = (extras.articles || []).map(x => `
+    <article class="journal-card">
+      <small>${x.category}</small>
+      <h3>${x.title}</h3>
+      <p>${x.description}</p>
+    </article>
+  `).join("");
+}
+
+function setup() {
+  // Theme toggle with localStorage support
+  const themeBtn = document.getElementById("themeToggle");
+  let dark = false;
+  try { dark = localStorage.getItem("out_theme") === "dark"; } catch(e) {}
+  if (dark) document.documentElement.setAttribute("data-theme", "dark");
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      dark = !dark;
+      if (dark) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      try { localStorage.setItem("out_theme", dark ? "dark" : "light"); } catch(e) {}
+    });
+  }
+
+  // Click & Keydown listeners on destination grid
+  const grid = document.getElementById("destinationGrid");
+  grid.addEventListener("click", e => {
+    const card = e.target.closest("[data-state]");
+    if (card) showDestination(decodeURIComponent(card.dataset.state));
+  });
+  grid.addEventListener("keydown", e => {
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-state]")) {
+      e.preventDefault();
+      showDestination(decodeURIComponent(e.target.dataset.state));
+    }
+  });
+
+  // Search & Filter listeners
+  document.getElementById("searchInput").addEventListener("input", renderDestinations);
+  document.getElementById("regionFilter").addEventListener("change", renderDestinations);
+
+  // Populate trip destination dropdown
+  const tripSelect = document.getElementById("tripDestination");
+  tripSelect.innerHTML += data.map(s => `<option value="${s.name}">${s.name} (${s.region})</option>`).join("");
+
+  // Days Slider
+  document.getElementById("tripDays").addEventListener("input", e => {
+    document.getElementById("daysValue").textContent = `${e.target.value} day${e.target.value === "1" ? "" : "s"}`;
+  });
+
+  // Trip Idea Planner Submission
+  document.getElementById("tripForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const dest = document.getElementById("tripDestination").value;
+    const style = document.getElementById("tripStyle").value;
+    const days = document.getElementById("tripDays").value;
+    const s = data.find(x => x.name === dest);
+    const res = document.getElementById("tripResult");
+    res.style.display = "block";
+    res.innerHTML = `
+      <strong>Your ${days}-day ${style.toLowerCase()} journey in ${dest}</strong><br>
+      Start with exploring: ${s.places.slice(0, 3).join(", ")}.<br>
+      Suggested overall visit pace: <strong>${s.duration}</strong>. Best season: <strong>${s.season}</strong>.<br>
+      <em>Adjust the pace to suit your interests and check current local information before travelling.</em>
+    `;
+  });
+
+  // Mobile menu toggle
+  document.getElementById("menuToggle").addEventListener("click", () => {
+    document.getElementById("mainNav").classList.toggle("open");
+  });
+
+  // Modal dismiss handlers
+  document.querySelectorAll("[data-close]").forEach(x => x.addEventListener("click", closeModal));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+  // Contact Form
+  const cForm = document.getElementById("contactForm");
+  if (cForm) {
+    cForm.addEventListener("submit", e => {
+      e.preventDefault();
+      document.getElementById("cSuccess").style.display = "block";
+    });
+  }
+
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Initial renders
+  renderDestinations();
+  renderExtras();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setup);
+} else {
+  setup();
+}
+</script>
+</body>
+</html>
